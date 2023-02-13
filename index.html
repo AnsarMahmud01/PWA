@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <!-- Responsive -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Title -->
+  <title>PWA</title>
+
+  <!-- Meta Tags required for Progressive Web App -->
+  <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+  <meta name="theme-color" content="black">
+
+  <!-- Manifest File link -->
+  <link rel="manifest" href="manifest.json">
+</head>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: rgb(134, 134, 134);
+  }
+
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+  }
+
+  button {
+    padding: 12px 10px 12px;
+    font-size: 1.6rem;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  div {
+    /* margin-top: 20px; */
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+  }
+</style>
+
+<body>
+  <div class="main">
+    <button id="get" onclick="sendNotification()">Get Notification</button>
+    <button onclick="share()">Share</button>
+    <div id="output"></div>
+    <div id="demo"></div>
+  </div>
+  <script src="./js.js"></script>
+
+
+  <script>
+    window.addEventListener('load', () => {
+      registerSW();
+    });
+
+    // Register the Service Worker
+    async function registerSW() {
+      if (navigator.serviceWorker) {
+        try {
+          await navigator
+            .serviceWorker
+            .register('serviceworker.js');
+        }
+        catch (e) {
+          console.log('SW registration failed');
+        }
+      } else { console.log("No worker here"); }
+    }
+  </script>
+</body>
+
+</html>
